@@ -25,7 +25,7 @@ The `.UseAzureRelay()` hosting extension is available via the `Microsoft.Azure.R
 You MUST remove all IISExpress references in the launchSettings.json of any ASP.NET Core application you create 
 from a template. The IIS Express settings are incompatible with this extension.
 
-```
+```csharp
 using Microsoft.Azure.Relay.AspNetCore;
 
 
@@ -41,3 +41,13 @@ var host = new WebHostBuilder()
 host.Run();
 ```
 
+## Proxy settings
+If you need to use a proxy to conect to azure, you can provide an `IWebProxy` as part of the Azure Relay options.
+
+```csharp
+.UseAzureRelay(options =>
+{
+	options.UrlPrefixes.Add(connectionString);
+	options.Proxy = new WebProxy("http://your.proxy:8080");
+})
+```

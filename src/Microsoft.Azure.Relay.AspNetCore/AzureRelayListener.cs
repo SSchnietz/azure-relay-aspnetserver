@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.Azure.Relay.AspNetCore
 {
@@ -120,6 +121,11 @@ namespace Microsoft.Azure.Relay.AspNetCore
                             // TODO: CR: An accept handler which simply returns true is the same as no handler at all.
                             // Would returning false and rejecting relayed connection requests be better? 
                             relayListener.AcceptHandler = WebSocketAcceptHandler;
+                            
+                            if (Options.Proxy != null)
+                            {
+	                            relayListener.Proxy = Options.Proxy;
+                            }
                             _relayListeners.Add(relayListener);
                         }
                     }
