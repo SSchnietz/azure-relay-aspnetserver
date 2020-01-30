@@ -326,7 +326,7 @@ namespace Microsoft.Azure.Relay.AspNetCore
         string IHttpResponseFeature.ReasonPhrase
         {
             get { return Response.ReasonPhrase; }
-            set { Response.ReasonPhrase = value; }
+            set { Response.ReasonPhrase = value ?? "Unknown"; }
         }
 
         int IHttpResponseFeature.StatusCode
