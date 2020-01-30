@@ -116,9 +116,15 @@ namespace Microsoft.Azure.Relay.AspNetCore
 
         private void CopyHeaders()
         {
-            foreach (var hdr in Headers.Keys)
+	        try
+	        {
+	            foreach (var hdr in Headers.Keys)
+	            {
+	                _innerResponse.Headers[hdr] = Headers[hdr];
+                }
+            }
+            catch
             {
-                _innerResponse.Headers[hdr] = Headers[hdr];
             }
         }
     }
