@@ -47,6 +47,8 @@ namespace Microsoft.Azure.Relay.AspNetCore
                 {
                     throw new ArgumentOutOfRangeException();
                 }
+
+                if (_innerResponse.StatusCode == (HttpStatusCode) value) return;
                 _innerResponse.StatusCode = (HttpStatusCode)value;
             }
         }
